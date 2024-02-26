@@ -1,1 +1,10 @@
 - In eventloop/timer.js, what will be the order of execution? Briefly explain the order of execution w.r.t the event loop phases.
+
+- On calling foo(2) foo is logged , this is part of main thread. 
+- bar(a) with a = 2 inside setTimeout  is queued in timers phase.it is not executed yet.
+- baz() is executed on main and baz is logged. 
+- foo(1) is called , foo is loogged,  this is part of main thread. 
+- bar(a) with a = 1  inside setTimeout  is queued in timers phase.it  is not executed yet. Its queued behind the earlier bar call.
+- now that code is idle it checks that there are no current i/os in poll phase, so it will move to pending callbacks where first 
+  bar(2) will execute followed by bar(1).
+  

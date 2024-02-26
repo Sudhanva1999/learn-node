@@ -1,1 +1,7 @@
 - In eventloop/poll.js, what will be the order of execution? Briefly explain the order of execution w.r.t the event loop phases.
+
+- someAsyncOperation is called and i/o is scheduled in polls 
+- foo is called and foo is logged. done is logged.
+- mian thread completes execution so event loop starts i/o operation queued on poll 
+- as file cannot be read, its callback is executed and error is logged. 
+ 

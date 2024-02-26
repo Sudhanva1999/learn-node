@@ -1,5 +1,7 @@
 const fs = require('fs');
-
+setImmediate(() => {
+  console.log('I was scheduled to run immediately before I/O');
+});
 fs.readFile('./data/test.txt', function(err, data) {
   const startCallback = Date.now();
   // do something that will take 10ms...

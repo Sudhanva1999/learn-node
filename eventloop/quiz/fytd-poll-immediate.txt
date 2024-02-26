@@ -1,2 +1,11 @@
 - Explain the order of execution in terms of the event loop for eventloop/immediate.js.
 - Will the order of execution change if timeout is changed to 0? Why or why not?
+
+- 1 
+- The main thread loop completes and read operations is started at poll , untill read completes nothing happens. 
+- After I/O completes , io callback is pushed to pending callback and since there are no pending i/o and check operations the callback is ececuted. 
+- In the callback , setTimeout is queued in timers and set Immediate is queued in check phase, now a new iteration starts and since no 
+  i/O operations are scheduled it will go and execute the check queue, after this it executed the setTimeout callback from pending Callbacks (since its moved to this queue after timer has ended)
+
+- 2 
+- It wont affect the order since there is priority to check queue. 
